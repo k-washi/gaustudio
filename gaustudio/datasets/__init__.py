@@ -1,7 +1,7 @@
 datasets = {}
 import numpy as np
 from PIL import Image
-import dataclasses
+import dataclasses, field
 import math
 import os
 import torch
@@ -125,14 +125,14 @@ class Camera:
     znear: float = 0.1
     zfar: float = 100
     
-    trans: np.array = np.array([0.0, 0.0, 0.0])
+    trans: np.array = field(default_factory=np.array([0.0, 0.0, 0.0]))
     scale: float = 1.0
 
     world_view_transform: torch.tensor = None 
     full_proj_transform: torch.tensor = None
     projection_matrix: torch.tensor = None
     camera_center: torch.tensor = None    
-    principal_point_ndc: np.array = np.array([0.5, 0.5])
+    principal_point_ndc: np.array = field(default_factory=np.array([0.5, 0.5]))
     
     image_path: str = None
     image_name: str = None
